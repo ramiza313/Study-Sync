@@ -1,0 +1,15 @@
+
+# Python virtual environment and cache
+.venv/
+__pycache__/
+*.py[cod]
+
+# API keys and environment secrets
+.env
+
+# Uploaded study materials
+uploads/web/
+
+# Local generated application data
+data/learning_packs.json
+data/resources.json
