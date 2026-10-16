@@ -48,9 +48,18 @@ For image OCR, install the Tesseract OCR engine on your computer as well as the 
 
 Study Sync was developed collaboratively by a four-member team, with each member taking primary responsibility for a different area of the project.
 
+
+
+## Project Documentation
+
 - Shahnoor — Presentation Lead: PowerPoint preparation, presentation structure, and communication of the problem statement and proposed solution.
 - Aymaan — Technical Design Lead: Algorithm design, algorithm flowchart, system architecture, and technical workflow documentation.
 - Zikra — UI/UX Design Lead: User-interface design, navigation flow, and user-experience planning.
 - Ramiza — Development Lead: Frontend and backend development, Flask integration, Gemma API integration, and application testing.
 
 All team members contributed to bringing the Study Sync prototype together.
+
+
+- [Research Background](research-background.md)
+- [System Architecture Flowchart](system-architecture.png)
+- [Algorithm Flowchart](algorithm-flowchart.png)
