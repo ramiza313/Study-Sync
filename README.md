@@ -60,6 +60,8 @@ Study Sync was developed collaboratively by a four-member team, with each member
 All team members contributed to bringing the Study Sync prototype together.
 
 
-- [Research Background](research-background.md)
-- [System Architecture Flowchart](system-architecture.png)
-- [Algorithm Flowchart](algorithm-flowchart.png)
+## Project Documentation
+
+- [Research Background](docs/research-background.md)
+- [System Architecture Flowchart](docs/system-architecture.png)
+- [Algorithm Flowchart](docs/algorithm-flowchart.png)
