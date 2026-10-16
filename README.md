@@ -43,3 +43,14 @@ For image OCR, install the Tesseract OCR engine on your computer as well as the 
 - The model name is configurable because API model IDs and access can vary. Verify the exact Gemma 4 model ID in your API console before the demo.
 - AI output is a draft, can be wrong, and must be reviewed by the teacher. Source labels help with review but are not guaranteed exact quotations/page citations.
 - The current approval state in the browser is prototype-level and not yet synced to a shared backend/student account.
+
+## Team Contributions
+
+Study Sync was developed collaboratively by a four-member team, with each member taking primary responsibility for a different area of the project.
+
+- Shahnoor — Presentation Lead: PowerPoint preparation, presentation structure, and communication of the problem statement and proposed solution.
+- Aymaan — Technical Design Lead: Algorithm design, algorithm flowchart, system architecture, and technical workflow documentation.
+- Zikra — UI/UX Design Lead: User-interface design, navigation flow, and user-experience planning.
+- Ramiza — Development Lead: Frontend and backend development, Flask integration, Gemma API integration, and application testing.
+
+All team members contributed to bringing the Study Sync prototype together.
