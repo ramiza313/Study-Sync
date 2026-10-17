@@ -129,9 +129,112 @@ strong,h3,label,.crumb strong,.topicmain strong,.subjectinfo strong{color:var(--
 
 @media(max-width:700px){.studentWelcome{grid-template-columns:1fr}.orbit{grid-column:1;grid-row:auto;margin:6px auto 0;width:150px;height:150px}#orbitRing{width:104px;height:104px}.studentWelcome h1{font-size:27px}}
 @media(prefers-reduced-motion:reduce){.orbit:before,.orbit:after{animation:none}}
+
+/* ===== Entry screen + teacher subject setup ===== */
+body.gated{overflow:hidden}
+.gate{position:fixed;inset:0;z-index:100;overflow:auto;display:none;padding:34px 20px 0;background:radial-gradient(900px 520px at 85% -8%,#3a35b855,transparent 60%),radial-gradient(700px 520px at -8% 105%,#0e8a8044,transparent 60%),#070a12}
+.gate.show{display:block}.gate-inner{max-width:1000px;margin:0 auto}
+.gate-brand{display:flex;align-items:center;gap:12px;margin-bottom:40px}
+.gate-hero{text-align:center;margin-bottom:34px}.gate-hero h1{font-size:40px;letter-spacing:-1.4px}.gate-hero .sub{margin:0 auto}
+.role-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;max-width:820px;margin:0 auto 40px}
+.role-card{position:relative;overflow:hidden;text-align:left;display:flex;flex-direction:column;gap:12px;padding:30px;border-radius:26px;border:1px solid #2c3566!important;background:linear-gradient(165deg,#171e45,#0e1228)!important;color:var(--ink)!important;transition:.2s}
+.role-card:before{content:"";position:absolute;width:260px;height:260px;right:-90px;top:-110px;border-radius:50%;background:radial-gradient(circle,var(--rc),transparent 70%);opacity:.45}
+.role-card.teacher{--rc:#6474ff}.role-card.student{--rc:#3fe0b5}
+.role-card:hover{transform:translateY(-4px);border-color:var(--rc)!important;box-shadow:0 22px 50px #00000060,0 0 0 1px var(--rc)}
+.role-ico{font-size:40px;line-height:1}.role-card strong{font-family:Sora,Inter,sans-serif;font-size:22px}
+.role-card span:not(.role-ico):not(.role-go){font-size:13px;color:var(--muted)!important;line-height:1.65}
+.role-go{margin-top:6px;font-size:12px;font-weight:800;color:var(--rc)}
+.setup-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.classroom-chip{display:inline-flex;gap:8px;align-items:center;font-size:11px;font-weight:800;color:#b3bcff;background:#1d2550;border:1px solid #2c3566;border-radius:999px;padding:8px 13px}
+.setup-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:22px 0}
+.subj-opt{--accent:#6474ff;position:relative;display:flex;flex-direction:column;gap:9px;padding:20px 18px;border-radius:20px;border:1px solid var(--line);background:linear-gradient(180deg,#151b36,#0f1429);cursor:pointer;transition:.18s;min-height:150px}
+.subj-opt:hover{transform:translateY(-3px);border-color:var(--accent)}
+.subj-opt.on{border-color:var(--accent);background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 16%,#151b36),#0f1429);box-shadow:0 0 0 1px var(--accent),0 14px 34px color-mix(in srgb,var(--accent) 25%,transparent)}
+.subj-ico{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-weight:900;font-size:13px;background:var(--accent);color:#0a0d17}
+.subj-opt strong{font-size:14px;line-height:1.4}.subj-hint{font-size:11px;color:var(--muted)}
+.subj-check{position:absolute;right:14px;top:14px;width:26px;height:26px;border-radius:50%;border:1.5px solid #3a4668;display:grid;place-items:center;font-size:13px;font-weight:900;color:#06241c}
+.subj-opt.on .subj-check{background:var(--green);border-color:var(--green);box-shadow:0 0 14px var(--green)}
+.subj-actions{display:flex;gap:7px;margin-top:auto}.subj-actions button{border:1px solid #34405a;background:#0d1226;color:var(--ink);border-radius:9px;padding:6px 9px;font-size:11px;font-weight:700}
+.subj-actions button:hover{border-color:var(--blue)}.subj-edit{margin:0!important;padding:8px!important}
+.custom-add{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:18px;border-radius:18px;border:1px dashed #3a4a8a;background:#0d1226}
+.custom-add .field{flex:1;min-width:200px;margin:0}
+.setup-bar{position:sticky;bottom:0;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:26px -20px 0;padding:16px 20px;background:#090d1bee;backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+.setup-bar .primary:disabled{opacity:.4;cursor:not-allowed}
+@media(max-width:700px){.role-grid{grid-template-columns:1fr}.gate-hero h1{font-size:30px}}
+
+/* ===== Onboarding steps + collapsible subject picker ===== */
+.step-chip{font-size:11px;font-weight:800;color:#b3bcff;background:#1d2550;border:1px solid #2c3566;border-radius:999px;padding:8px 13px}
+.gate h1{margin-top:4px}.gate .rowtabs{margin:24px 0 18px}
+.addicon{flex:0 0 auto;width:38px;height:38px;padding:0;border-radius:12px;border:0!important;background:linear-gradient(135deg,#6474ff,#8a5bff)!important;color:#fff!important;font-size:22px;font-weight:600;line-height:1;display:grid;place-items:center;box-shadow:0 8px 20px #6474ff55;transition:transform .2s}
+.addicon.open{transform:rotate(45deg)}.addicon:hover{filter:brightness(1.15)}
+.done-badge{width:92px;height:92px;margin:10px auto 18px;border-radius:50%;display:grid;place-items:center;font-size:44px;font-weight:900;color:#05231b;background:linear-gradient(135deg,#3fe0b5,#8affdf);box-shadow:0 0 0 10px #3fe0b522,0 0 50px #3fe0b566}
+.sum-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;max-width:760px;margin:28px auto 0;text-align:left}
+.sum-row{padding:16px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(180deg,#151b36,#0f1429)}
+.sum-row span{display:block;font-size:10px;letter-spacing:1px;font-weight:800;color:var(--muted)}.sum-row strong{display:block;margin-top:6px;font-size:14px}
+@media(max-width:700px){.sum-grid{grid-template-columns:1fr 1fr}}
+
+/* ===== Classroom code / link ===== */
+.class-share{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:12px}
+.class-box{display:flex;flex-direction:column;gap:9px;padding:16px;border-radius:16px;border:1px dashed #3a4a8a;background:#0d1226;min-width:0}
+.class-box>span{font-size:10px;letter-spacing:1px;font-weight:800;color:var(--muted)}
+.class-box strong{font-family:ui-monospace,Consolas,monospace;font-size:21px;letter-spacing:1px;color:#8affdf!important;word-break:break-all}
+.class-box .linkline{font-size:13px;letter-spacing:0;color:#b3bcff!important}.class-box button{align-self:flex-start}
+.sum-row.wide{grid-column:1/-1}
+#departmentAnalytics{grid-template-columns:repeat(auto-fit,minmax(240px,340px))}
+@media(max-width:700px){.class-share{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
+<div class="gate" id="gate"><div class="gate-inner">
+  <div class="gate-brand"><div class="brand-icon">SS</div><div><div class="brand-name">Study Sync</div><div class="brand-sub">Learn at your own pace</div></div></div>
+  <div id="gRole">
+    <div class="gate-hero"><div class="eyebrow">WELCOME</div><h1>Who's stepping in today?</h1><p class="sub">Choose how you'd like to use Study Sync. You can switch roles at any time.</p></div>
+    <div class="role-grid">
+      <button type="button" class="role-card teacher" id="pickTeacher"><span class="role-ico">🎓</span><strong>I'm a Teacher</strong><span>Choose the subjects you teach, track syllabus coverage and generate learning packs from your own materials.</span><span class="role-go">Continue as teacher →</span></button>
+      <button type="button" class="role-card student" id="pickStudent"><span class="role-ico">🌱</span><strong>I'm a Student</strong><span>Join your classroom with a class code or link, then revise topics, practise with quizzes and plan what to revisit.</span><span class="role-go">Continue as student →</span></button>
+    </div>
+  </div>
+  <div id="gDept" style="display:none">
+    <div class="setup-top"><button type="button" class="backbtn" data-gback="Role">← Change role</button><span style="display:flex;gap:10px;align-items:center"><button type="button" class="secondary small" id="skipSetupBtn" style="display:none">Skip to my dashboard →</button><span class="step-chip">Step 1 of 4</span></span></div>
+    <div class="eyebrow">SETUP · DEPARTMENT</div><h1>Choose your department</h1>
+    <p class="sub">Pick the department you teach in. Only Management is open in this demo; the others are previews.</p>
+    <div id="gDeptGrid" class="rowtabs"></div>
+    <div class="custom-add"><strong>＋ Add a department</strong><input id="newDept" class="field" maxlength="40" placeholder="e.g. Commerce"><button type="button" class="secondary" id="addDeptBtn">Add department</button><span id="deptMsg" class="feedback" style="width:100%;margin:0" aria-live="polite"></span></div>
+  </div>
+  <div id="gCourse" style="display:none">
+    <div class="setup-top"><button type="button" class="backbtn" data-gback="Dept">← Departments</button><span class="step-chip">Step 2 of 4</span></div>
+    <div class="eyebrow">SETUP · COURSE</div><h1>Choose your course</h1>
+    <p class="sub">Management department. Only BBA-CA is open in this demo.</p>
+    <div id="gCourseGrid" class="rowtabs"></div>
+    <div class="custom-add"><strong>＋ Add a course</strong><input id="newCourse" class="field" maxlength="40" placeholder="e.g. MBA"><button type="button" class="secondary" id="addCourseBtn">Add course</button><span id="courseMsg" class="feedback" style="width:100%;margin:0" aria-live="polite"></span></div>
+  </div>
+  <div id="gYear" style="display:none">
+    <div class="setup-top"><button type="button" class="backbtn" data-gback="Course">← Courses</button><span class="step-chip">Step 3 of 4</span></div>
+    <div class="eyebrow">SETUP · YEAR</div><h1>Choose the year</h1>
+    <p class="sub">Management · BBA-CA. Only First Year is open in this demo.</p>
+    <div id="gYearGrid" class="rowtabs"></div>
+    <div class="custom-add"><strong>＋ Need a fourth year? (optional)</strong><button type="button" class="secondary" id="addFourthBtn">Add Fourth Year</button></div>
+  </div>
+  <div id="gSem" style="display:none">
+    <div class="setup-top"><button type="button" class="backbtn" data-gback="Year">← Years</button><span class="step-chip">Step 4 of 4</span></div>
+    <div class="eyebrow">SETUP · SEMESTER</div><h1>Which semester is this?</h1>
+    <p class="sub">Management · BBA-CA · First Year. Type the semester, or tap a quick option.</p>
+    <div class="custom-add" style="margin-top:24px;max-width:640px"><input id="semInput" class="field" maxlength="30" placeholder="e.g. 1 or Semester 1"><button type="button" class="secondary" data-sem-chip="Semester 1">Semester 1</button><button type="button" class="secondary" data-sem-chip="Semester 2">Semester 2</button><span id="semMsg" class="feedback" style="width:100%;margin:0" aria-live="polite"></span></div>
+    <div style="margin-top:22px"><button type="button" class="primary" id="finishSetupBtn" style="padding:13px 20px;font-size:13px">Finish setup →</button></div>
+  </div>
+  <div id="gJoin" style="display:none">
+    <div class="setup-top"><button type="button" class="backbtn" data-gback="Role">← Change role</button></div>
+    <div class="eyebrow">JOIN YOUR CLASSROOM</div><h1>Paste your class code or link</h1>
+    <p class="sub">Your teacher shares a code or link for your year's classroom. Paste it here, and you're in. No other setup needed.</p>
+    <div class="custom-add" style="margin-top:24px;max-width:700px"><input id="joinInput" class="field" placeholder="e.g. BBACA-Y1-K7M2, or the full class link"><button type="button" class="primary" id="joinBtn">Join classroom →</button><span id="joinMsg" class="feedback" style="width:100%;margin:0" aria-live="polite"></span></div>
+  </div>
+  <div id="gDone" style="display:none;text-align:center">
+    <div class="done-badge">✓</div><div class="eyebrow">ALL SET</div><h1>Setup finished</h1>
+    <p class="sub" style="margin:0 auto">Your classroom is ready. Inside the dashboard you'll add the subjects you teach.</p>
+    <div class="sum-grid" id="doneSummary"></div>
+    <button type="button" class="primary" id="enterDashBtn" style="margin-top:28px;padding:14px 24px;font-size:14px">Enter dashboard →</button>
+  </div>
+</div></div>
 <div class="app">
 <aside class="sidebar">
   <div class="brand"><div class="brand-icon">SS</div><div class="brandcopy"><div class="brand-name">Study Sync</div><div class="brand-sub">Learn at your own pace</div></div></div>
@@ -150,7 +253,7 @@ strong,h3,label,.crumb strong,.topicmain strong,.subjectinfo strong{color:var(--
 
 <section id="home" class="view active">
   <div id="studentHome">
-    <div class="studentWelcome"><div class="eyebrow">YOUR LEARNING JOURNEY</div><h1>Hi, learner! 🌱</h1><p>Your classes give you the path. This space helps you understand each topic, practise what you've learned, and plan what to revisit — one step at a time.</p><button class="primary" data-goto="learn">Pick up where you left off →</button></div>
+    <div class="studentWelcome"><div class="eyebrow">YOUR LEARNING JOURNEY</div><h1>Hi, learner! 🌱</h1><p>Your classes give you the path. This space helps you understand each topic, practise what you've learned, and plan what to revisit — one step at a time.</p><button class="primary" data-goto="learn">Pick up where you left off →</button><button class="secondary" data-leave-class type="button">Change classroom</button></div>
     <div class="stats">
       <div class="stat"><div class="statlabel">My subjects</div><div class="statvalue" id="studentSubjectCount">5</div><div class="statfoot">In your current batch</div></div>
       <div class="stat"><div class="statlabel">Class topics covered</div><div class="statvalue" id="studentCovered">0/25</div><div class="statfoot">Confirmed by teachers</div></div>
@@ -160,7 +263,12 @@ strong,h3,label,.crumb strong,.topicmain strong,.subjectinfo strong{color:var(--
     <div class="grid2"><section class="panel"><div class="panelhead"><div><h2 id="studentTopicTitle">Your class topics</h2><p id="studentTopicSub">What your teacher has confirmed so far.</p></div></div><div id="studentTopics" class="topiclist"></div></section><section class="panel"><div class="panelhead"><div><h2>A gentle reminder 💜</h2></div></div><div class="heroNote"><strong>Covered doesn't always mean understood.</strong><p>It's completely okay to revisit a topic. Use the learning pack and quiz to check what makes sense to you.</p></div><button class="primary" data-goto="learn">Explore a learning pack →</button></section></div>
   </div>
   <div id="teacherHome" style="display:none">
-    <div class="head"><div><div class="eyebrow">YOUR TEACHING WORKSPACE</div><h1>Good evening, Ms. Ayesha 👋</h1><p class="sub">See teaching progress at a glance. Select a department to explore its courses, years, subjects, and topic coverage.</p></div></div>
+    <div class="head"><div><div class="eyebrow">YOUR TEACHING WORKSPACE</div><h1>Good evening, Ms. Ayesha 👋</h1><p class="sub">See teaching progress at a glance. Select a department to explore its courses, years, subjects, and topic coverage.</p></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="secondary" data-edit-subjects type="button">✎ Manage my subjects</button><button class="secondary" data-edit-setup type="button">⚙ Edit classroom setup</button></div></div>
+    <section class="panel" id="classroomShare" style="display:none">
+      <div class="panelhead"><div><div class="eyebrow">YOUR CLASSROOM</div><h2 id="classroomTitle">Classroom</h2><p>Students join this classroom with the class code or link below. They don't repeat any setup.</p></div><span class="pill done">ACTIVE</span></div>
+      <div class="class-share"><div class="class-box"><span>CLASS CODE</span><strong id="classCodeText">—</strong><button type="button" class="secondary small" data-copy="code">Copy code</button></div><div class="class-box"><span>CLASS LINK</span><strong id="classLinkText" class="linkline">—</strong><button type="button" class="secondary small" data-copy="link">Copy link</button></div></div>
+      <p id="copyMsg" class="feedback" aria-live="polite"></p>
+    </section>
     <section class="panel"><div class="panelhead"><div><h2>Department progress</h2><p>Each circular chart shows teacher-confirmed syllabus coverage across your assigned subjects.</p></div><span class="pill done">LIVE DEMO DATA</span></div><div id="departmentAnalytics" class="analytics-grid"></div><p class="notice" style="margin-top:15px">Coverage means a teacher has marked a topic as taught. It does not measure student mastery.</p></section>
   </div>
 </section>
@@ -168,11 +276,9 @@ strong,h3,label,.crumb strong,.topicmain strong,.subjectinfo strong{color:var(--
 <section id="batches" class="view">
   <div class="head"><div><div class="eyebrow">YOUR TEACHING SPACE</div><h1>My Batches</h1><p class="sub">Explore your predefined teaching assignments, one step at a time.</p></div></div>
   <div id="flowDepartments" class="flow-screen active">
-    <section class="flow-panel"><div class="flow-top"><div><h2 class="flow-title">Choose a department</h2><p class="flow-sub">Assigned departments can be opened. Other departments are shown as previews.</p></div></div>
+    <section class="flow-panel"><div class="flow-top"><div><h2 class="flow-title">Choose a department</h2><p class="flow-sub">Your department, selected at sign-in.</p></div></div>
       <div class="rowtabs">
-        <button class="rowtab selected" data-dept="management"><strong>🏢 &nbsp; Management</strong><span>BBA · BBA-CA · BCA</span><span class="batchtag live">WORKING DEMO</span></button>
-        <button class="rowtab" data-preview="Science" disabled><strong>🧪 &nbsp; Science</strong><span>Department structure preview</span><span class="batchtag">PREVIEW ONLY</span></button>
-        <button class="rowtab" data-preview="IT" disabled><strong>💻 &nbsp; IT</strong><span>Department structure preview</span><span class="batchtag">PREVIEW ONLY</span></button>
+        <button class="rowtab selected" data-dept="management"><strong id="dashDeptName">🏢 &nbsp; Management</strong><span id="dashDeptSub">BBA-CA · First Year</span><span class="batchtag live">SELECTED AT SIGN-IN</span></button>
       </div>
     </section>
   </div>
@@ -185,18 +291,23 @@ strong,h3,label,.crumb strong,.topicmain strong,.subjectinfo strong{color:var(--
     <section class="flow-panel"><div class="panelhead"><div><h2>Year-wise progress</h2><p>Teaching coverage across each year of BBA-CA.</p></div></div><div id="yearAnalytics" class="level-choice-grid"></div></section>
   </div>
   <div id="flowSubjects" class="flow-screen">
-    <div class="flow-top"><button class="backbtn" data-flow-back="years">← Years</button><div><h2 class="flow-title">Assigned subjects</h2><p class="flow-sub">Management · BBA-CA · First Year · Semester 1</p></div></div>
-    <section class="flow-panel"><h2>Subject-wise teaching progress</h2><p>Select a subject to view its individual syllabus topics and update teaching coverage.</p><div id="batchSubjectAnalytics" class="analytics-grid"></div></section>
+    <div class="flow-top"><button class="backbtn" data-flow-back="years">← Years</button><div><h2 class="flow-title">Your subjects in this classroom</h2><p class="flow-sub" id="flowSubjectsSub">Management · BBA-CA · First Year · Classroom A · Semester 1</p></div></div>
+    <section class="flow-panel"><div class="panelhead"><div><h2>Your subjects</h2><p>Open a subject to upload its syllabus and tick off topics as you teach them.</p></div><button type="button" class="addicon" id="togglePickerBtn" aria-label="Add or manage subjects" title="Add a subject">＋</button></div><div id="batchSubjectAnalytics" class="analytics-grid"></div><div id="pickerWrap" style="display:none"><div class="sectiontitle">Choose the subjects you teach</div>
+<p class="sub" style="margin-bottom:6px">Tap a subject to add it to this classroom. You can rename or remove subjects any time; removing one never deletes its uploaded materials or learning packs.</p>
+<div id="subjectPicker" class="setup-grid"></div>
+<div class="custom-add"><strong>＋ Teach something that isn't listed?</strong><input id="customName" class="field" maxlength="60" placeholder="e.g. Cyber Security"><button type="button" class="secondary" id="addCustomBtn">Add subject</button><span id="customMsg" class="feedback" style="width:100%;margin:0" aria-live="polite"></span></div><div style="display:flex;justify-content:flex-end;margin-top:14px"><button type="button" class="primary" id="donePickerBtn">✓ Done</button></div></div></section>
   </div>
   <div id="flowTopics" class="flow-screen">
     <div class="flow-top"><button class="backbtn" data-flow-back="subjects">← Assigned subjects</button><div><h2 class="flow-title">Topic coverage</h2><p class="flow-sub">Mark a topic as taught only after covering it in class.</p></div></div>
     <section class="flow-panel"><div class="topic-analysis-head"><div id="topicRing" class="ring"><strong id="topicRingPercent">0%</strong></div><div class="topic-analysis-copy"><strong id="flowTopicSubject">Selected subject</strong><span id="flowTopicSummary">0 of 0 topics covered</span></div></div><div id="flowTopicList" class="topiclist"></div><p class="notice" style="margin-top:14px">This is teacher-confirmed classroom coverage, not a measure of whether every student has mastered the topic.</p>
+      <div class="sectiontitle">Syllabus → topic checklist</div><p class="sub">Upload this subject's syllabus (text or image), review the topics found, then confirm. They become the checklist above.</p><div id="syllabusSlot"></div>
       <div class="sectiontitle">Subject resources & learning pack</div>
       <p class="sub">Keep the sources you teach from attached to this subject. Add more resources whenever needed; existing sources are retained.</p>
+      <div class="notice" style="margin-bottom:12px"><strong>Backend connection</strong><div id="backendStatus" class="feedback" style="margin:6px 0" aria-live="polite"></div><div class="custom-add" style="padding:12px"><input id="apiBaseInput" class="field" placeholder="Backend address, e.g. http://localhost:5000 (leave empty if the backend serves this page)"><button type="button" class="secondary small" id="testBackendBtn">Save &amp; test connection</button></div></div>
       <label class="fieldlabel" for="teachingResources">Upload teaching sources</label>
       <div class="uploadzone"><input id="teachingResources" class="field" type="file" multiple accept=".pdf,.docx,.pptx,.txt,.md,.csv,.png,.jpg,.jpeg,.webp"><p>Supported in this prototype: PDF, DOCX, PPTX, TXT, MD, CSV, PNG, JPG, WEBP. Legacy DOC/PPT files are not supported; save them as DOCX/PPTX first.</p><button class="primary" id="uploadResourcesBtn" type="button">＋ Add teaching resources</button><div id="resourceStatus" class="feedback" aria-live="polite"></div></div>
       <div id="resourceList" class="learningcard"><p>No resources loaded yet. Start by uploading the materials you teach from.</p></div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button class="secondary" data-goto="syllabus" type="button">Upload / update syllabus →</button></div>
+      
     </section>
   </div>
 </section>
@@ -259,7 +370,9 @@ const BATCHES=[
 {id:"second",name:"Second Year",department:"BBA-CA",division:"A",semester:3,active:false,configured:false,emoji:"🌿"},
 {id:"third",name:"Third Year",department:"BBA-CA",division:"A",semester:5,active:false,configured:false,emoji:"🎓"}
 ];
-const TEACHER={name:"Ms. Ayesha Shaikh",batchIds:["first"],subjectIds:["web","programming"]};
+const TEACHER={name:"Ms. Ayesha Shaikh",batchIds:["first"],subjectIds:[]};
+let teacherSetupDone=readStore("sts_teacher_setup",false);
+{const _ids=readStore("sts_teacher_ids",null);if(Array.isArray(_ids))TEACHER.subjectIds=_ids}
 let subjects=readStore("sts_subjects",INITIAL_SUBJECTS);
 let selectedPackTopicId=null;
 let expandedTeacherTopicId=null;
@@ -271,9 +384,10 @@ let syllabusFlowScreen="Departments",syllabusCourse="BBA-CA",syllabusWorkspaceOp
 function readStore(key,fallback){try{const v=localStorage.getItem(key);return v?JSON.parse(v):fallback}catch(e){return fallback}}
 function save(){try{localStorage.setItem("sts_subjects",JSON.stringify(subjects));localStorage.setItem("sts_scores",JSON.stringify(quizScores))}catch(e){}}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function SD(){return teacherSetup||{dept:"Management",course:"BBA-CA",year:"First Year"}}
 function batch(){return BATCHES.find(b=>b.id===selectedBatchId)||BATCHES[0]}
-function subject(){return subjects.find(s=>s.id===selectedSubjectId)||subjects[0]}
-function allForBatch(){return subjects.filter(s=>s.batchId===selectedBatchId)}
+function subject(){return subjects.find(s=>s.id===selectedSubjectId)||allForBatch()[0]||subjects[0]}
+function allForBatch(){return subjects.filter(s=>s.batchId===selectedBatchId&&(!teacherSetupDone||TEACHER.subjectIds.includes(s.id)))}
 function visibleSubjects(){return role==="teacher"?allForBatch().filter(s=>TEACHER.subjectIds.includes(s.id)):allForBatch()}
 function coverage(s){return s.topics.length?Math.round(s.topics.filter(t=>t.done).length/s.topics.length*100):0}
 function go(page){document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===page));document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===page));const labels={home:"Home",batches:"My batches",subjects:"My subjects",syllabus:"Syllabus Studio",learn:"Learning Studio",revision:"Revision plan"};document.getElementById("crumb").textContent=labels[page]||"Home";renderAll()}
@@ -284,11 +398,7 @@ function teacherCoverage(){const list=visibleSubjects(),topics=list.flatMap(s=>s
 function renderDepartmentAnalytics(){
  const target=document.getElementById("departmentAnalytics");if(!target)return;
  const pct=teacherCoverage();
- const departments=[
-  {id:"management",name:"Management",detail:"BBA · BBA-CA · BCA",percent:pct,active:true,note:`BBA-CA · First Year · ${visibleSubjects().length} assigned subjects`},
-  {id:"science",name:"Science",detail:"Department preview",percent:0,active:false,note:"No teaching data connected yet"},
-  {id:"it",name:"IT",detail:"Department preview",percent:0,active:false,note:"No teaching data connected yet"}
- ];
+ const departments=[{id:"management",name:SD().dept,detail:SD().course+" · "+SD().year,percent:pct,active:true,note:`${visibleSubjects().length} assigned subject(s)`}];
  target.innerHTML=departments.map(d=>`<${d.active?"button":"div"} class="analytics-card ${d.active?"department-live":"department-preview"}" ${d.active?'data-open-department="management"':''} ${d.active?'':'aria-label="Preview only department"'}>${progressRing(d.percent)}<span class="analytics-copy"><strong>${d.name}</strong><span>${d.detail}</span><span>${d.note}</span><span class="batchtag ${d.active?"live":""}">${d.active?"OPEN DEPARTMENT →":"PREVIEW ONLY"}</span></span></${d.active?"button":"div"}>`).join("");
 }
 function setBatchFlow(screen){batchFlowScreen=screen;document.querySelectorAll("#batches .flow-screen").forEach(el=>el.classList.toggle("active",el.id==="flow"+screen.charAt(0).toUpperCase()+screen.slice(1)))}
@@ -296,21 +406,17 @@ function aggregateCoverage(list){const topics=list.flatMap(s=>s.topics);return t
 function renderLevelAnalytics(){
  const courseTarget=document.getElementById("courseAnalytics");
  if(courseTarget){
-  const courses=[
-   {name:"BBA",detail:"Bachelor of Business Administration",percent:0,live:false},
-   {name:"BBA-CA",detail:"Computer Applications",percent:aggregateCoverage(visibleSubjects()),live:true},
-   {name:"BCA",detail:"Bachelor of Computer Applications",percent:0,live:false}
-  ];
-  courseTarget.innerHTML=courses.map(c=>`<div class="level-choice"><div class="level-analysis-card">${progressRing(c.percent,true)}<span class="analytics-copy"><strong>${c.name} analysis</strong><span>${c.percent}% syllabus coverage</span><span>${c.live?"Based on assigned subject topics":"No teaching data connected"}</span></span></div><button class="rowtab ${c.live?"selected":""}" data-course="${c.name}" ${c.live?"":"disabled"}><strong>${c.name}</strong><span>${c.detail}</span><span class="batchtag ${c.live?"live":""}">${c.live?"WORKING DEMO":"PREVIEW ONLY"}</span></button></div>`).join("");
+  const courses=[{name:SD().course,detail:"Selected at sign-in",percent:aggregateCoverage(visibleSubjects()),live:true}];
+  courseTarget.innerHTML=courses.map(c=>`<div class="level-choice"><div class="level-analysis-card">${progressRing(c.percent,true)}<span class="analytics-copy"><strong>${c.name} analysis</strong><span>${c.percent}% syllabus coverage</span><span>${c.live?"Based on assigned subject topics":"No teaching data connected"}</span></span></div><button class="rowtab ${c.live?"selected":""}" data-course="${c.name}" ${c.live?"":"disabled"}><strong>${c.name}</strong><span>${c.detail}</span><span class="batchtag ${c.live?"live":""}">${c.live?"SELECTED":"PREVIEW ONLY"}</span></button></div>`).join("");
  }
  const yearTarget=document.getElementById("yearAnalytics");
  if(yearTarget){
-  const years=BATCHES.map(b=>{const list=b.configured?visibleSubjects().filter(s=>s.batchId===b.id):[];return {id:b.id,name:b.name,detail:"Semester "+b.semester,percent:aggregateCoverage(list),live:b.configured,topics:list.flatMap(s=>s.topics).length};});
-  yearTarget.innerHTML=years.map(y=>`<div class="level-choice"><div class="level-analysis-card">${progressRing(y.percent,true)}<span class="analytics-copy"><strong>${y.name} analysis</strong><span>${y.percent}% syllabus coverage</span><span>${y.live?`${y.topics} assigned topic entries`:"No teaching data connected"}</span></span></div><button class="rowtab ${y.live?"selected":""}" data-batch="${y.id}" ${y.live?"":"disabled"}><strong>${y.name}</strong><span>${y.detail}${y.id==="first"?" · Division A":""}</span><span class="batchtag ${y.live?"live":""}">${y.live?"WORKING DEMO":"PREVIEW ONLY"}</span></button></div>`).join("");
+  const years=BATCHES.filter(b=>b.configured).map(b=>{const list=b.configured?visibleSubjects().filter(s=>s.batchId===b.id):[];return {id:b.id,name:b.name,detail:"Semester "+b.semester,percent:aggregateCoverage(list),live:b.configured,topics:list.flatMap(s=>s.topics).length};});
+  yearTarget.innerHTML=years.map(y=>`<div class="level-choice"><div class="level-analysis-card">${progressRing(y.percent,true)}<span class="analytics-copy"><strong>${y.name} analysis</strong><span>${y.percent}% syllabus coverage</span><span>${y.live?`${y.topics} assigned topic entries`:"No teaching data connected"}</span></span></div><button class="rowtab ${y.live?"selected":""}" data-batch="${y.id}" ${y.live?"":"disabled"}><strong>${y.name}</strong><span>${y.detail}${y.id==="first"?" · Division A":""}</span><span class="batchtag ${y.live?"live":""}">${y.live?"SELECTED":"PREVIEW ONLY"}</span></button></div>`).join("");
  }
 }
-function renderBatchFlow(){renderLevelAnalytics();const list=visibleSubjects();const target=document.getElementById("batchSubjectAnalytics");if(target){target.innerHTML=list.map(s=>`<button class="analytics-card" data-flow-subject="${esc(s.id)}">${progressRing(coverage(s),true)}<span class="analytics-copy"><strong>${esc(s.name)}</strong><span>${s.topics.filter(t=>t.done).length} of ${s.topics.length} topics covered</span><span class="batchtag live">VIEW TOPICS →</span></span></button>`).join("")||'<p class="empty">No subjects are assigned to this teacher in this year.</p>'}const s=subject();const ring=document.getElementById("topicRing");if(ring)ring.style.setProperty("--progress",coverage(s)+"%");const percent=document.getElementById("topicRingPercent");if(percent)percent.textContent=coverage(s)+"%";const title=document.getElementById("flowTopicSubject");if(title)title.textContent=s.name;const summary=document.getElementById("flowTopicSummary");if(summary)summary.textContent=s.topics.filter(t=>t.done).length+" of "+s.topics.length+" topics covered";const topics=document.getElementById("flowTopicList");if(topics)topics.innerHTML=s.topics.map(t=>{const pack=generatedPacks[s.id+"::"+t.id],isExpanded=expandedTeacherTopicId===t.id;return `<div class="topic teacher-topic-row" data-expand-topic-row="${esc(t.id)}" style="align-items:flex-start;flex-wrap:wrap;margin-bottom:12px;cursor:pointer"><button class="check ${t.done?"done":""}" data-topic="${esc(t.id)}" aria-label="Toggle topic coverage">${t.done?"✓":""}</button><span class="topicmain"><button type="button" class="topic-title-toggle" data-expand-topic="${esc(t.id)}" aria-expanded="${isExpanded}" style="display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;padding:0;border:0;background:transparent;color:var(--ink);text-align:left;cursor:pointer"><strong style="margin:0">${esc(t.name)}</strong><span style="white-space:nowrap;color:var(--blue);font-size:11px">${isExpanded?"− Hide options":"＋ Options"}</span></button><span>${t.done?"Teacher-confirmed as taught":"Not yet marked as taught"}</span>${isExpanded?`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="primary" type="button" data-generate-topic="${esc(t.id)}">✦ Generate with Gemma 4</button><button class="secondary" type="button" data-review-topic="${esc(t.id)}">Review Learning Pack${pack?" ✓":" →"}</button></div><span id="topicPackStatus-${esc(t.id)}" class="feedback" aria-live="polite">${pack?(pack.approved?"Approved learning pack saved.":"Learning pack draft saved."):""}</span>`:""}</span><span class="pill ${t.done?"done":""}">${t.done?"COVERED":"NOT COVERED"}</span></div>`}).join("")||'<p class="empty">No topics added yet. Use Syllabus Studio to add the subject syllabus.</p>';renderResourceList();document.querySelectorAll("[data-batch]").forEach(el=>el.classList.toggle("selected",el.dataset.batch===selectedBatchId))}
-function renderRole(){const t=role==="teacher";document.getElementById("teacherBtn").classList.toggle("active",t);document.getElementById("studentBtn").classList.toggle("active",!t);document.getElementById("studentHome").style.display=t?"none":"block";document.getElementById("teacherHome").style.display=t?"block":"none";document.getElementById("batchNav").style.display=t?"flex":"none";document.getElementById("syllabusNav").style.display=t?"flex":"none";const revNav=document.querySelector("[data-page=revision]");if(revNav)revNav.style.display=t?"none":"flex";document.getElementById("sideNoteTitle").textContent=t?"Keep it simple ✨":"One step at a time ✨";document.getElementById("sideNote").textContent=t?"Your assigned classes, syllabus and topic coverage.":"Small learning sessions can make a big difference."}
+function renderBatchFlow(){renderLevelAnalytics();const list=visibleSubjects();const target=document.getElementById("batchSubjectAnalytics");if(target){target.innerHTML=list.map(s=>`<button class="analytics-card" data-flow-subject="${esc(s.id)}">${progressRing(coverage(s),true)}<span class="analytics-copy"><strong>${esc(s.name)}</strong><span>${s.topics.filter(t=>t.done).length} of ${s.topics.length} topics covered</span><span class="batchtag live">VIEW TOPICS →</span></span></button>`).join("")||'<p class="empty">You have not added any subjects yet. Choose the subjects you teach below.</p>'}const s=subject();const ring=document.getElementById("topicRing");if(ring)ring.style.setProperty("--progress",coverage(s)+"%");const percent=document.getElementById("topicRingPercent");if(percent)percent.textContent=coverage(s)+"%";const title=document.getElementById("flowTopicSubject");if(title)title.textContent=s.name;const summary=document.getElementById("flowTopicSummary");if(summary)summary.textContent=s.topics.filter(t=>t.done).length+" of "+s.topics.length+" topics covered";const topics=document.getElementById("flowTopicList");if(topics)topics.innerHTML=s.topics.map(t=>{const pack=generatedPacks[s.id+"::"+t.id],isExpanded=expandedTeacherTopicId===t.id;return `<div class="topic teacher-topic-row" data-expand-topic-row="${esc(t.id)}" style="align-items:flex-start;flex-wrap:wrap;margin-bottom:12px;cursor:pointer"><button class="check ${t.done?"done":""}" data-topic="${esc(t.id)}" aria-label="Toggle topic coverage">${t.done?"✓":""}</button><span class="topicmain"><button type="button" class="topic-title-toggle" data-expand-topic="${esc(t.id)}" aria-expanded="${isExpanded}" style="display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;padding:0;border:0;background:transparent;color:var(--ink);text-align:left;cursor:pointer"><strong style="margin:0">${esc(t.name)}</strong><span style="white-space:nowrap;color:var(--blue);font-size:11px">${isExpanded?"− Hide options":"＋ Options"}</span></button><span>${t.done?"Teacher-confirmed as taught":"Not yet marked as taught"}</span>${isExpanded?`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="primary" type="button" data-generate-topic="${esc(t.id)}">✦ Generate with Gemma 4</button><button class="secondary" type="button" data-review-topic="${esc(t.id)}">Review Learning Pack${pack?" ✓":" →"}</button></div><span id="topicPackStatus-${esc(t.id)}" class="feedback" aria-live="polite">${pack?(pack.approved?"Approved learning pack saved.":"Learning pack draft saved."):""}</span>`:""}</span><span class="pill ${t.done?"done":""}">${t.done?"COVERED":"NOT COVERED"}</span></div>`}).join("")||'<p class="empty">No checklist yet. Upload the syllabus below and confirm the topics to generate it.</p>';renderResourceList();document.querySelectorAll("[data-batch]").forEach(el=>el.classList.toggle("selected",el.dataset.batch===selectedBatchId))}
+function renderRole(){const t=role==="teacher";document.getElementById("teacherBtn").classList.toggle("active",t);document.getElementById("studentBtn").classList.toggle("active",!t);document.getElementById("studentHome").style.display=t?"none":"block";document.getElementById("teacherHome").style.display=t?"block":"none";document.getElementById("batchNav").style.display=t?"flex":"none";document.getElementById("syllabusNav").style.display="none";const revNav=document.querySelector("[data-page=revision]");if(revNav)revNav.style.display=t?"none":"flex";document.getElementById("sideNoteTitle").textContent=t?"Keep it simple ✨":"One step at a time ✨";document.getElementById("sideNote").textContent=t?"Your assigned classes, syllabus and topic coverage.":"Small learning sessions can make a big difference."}
 function renderHome(){const list=visibleSubjects(),topics=list.flatMap(s=>s.topics);document.getElementById("studentSubjectCount").textContent=allForBatch().length;document.getElementById("studentCovered").textContent=topics.filter(t=>t.done).length+"/"+topics.length;document.getElementById("studentReview").textContent=Object.values(quizScores).filter(n=>n<70).length;document.getElementById("studentSubjects").innerHTML=allForBatch().map(subjectCard).join("");renderDepartmentAnalytics();renderStudentTopics();enhanceHome()}
 /* Student orbit hero + teacher stats row */
 function enhanceHome(){
@@ -449,17 +555,17 @@ function renderLearn(){
 }function renderRevision(){const s=subject(),notTaught=s.topics.filter(t=>!t.done),weak=s.topics.filter(t=>quizScores[t.id]!==undefined&&quizScores[t.id]<70);document.getElementById("revisionSubject").textContent=s.name;let out="";if(weak.length)out+=`<div class="planitem"><span class="daytag">FIRST</span><div><strong>Revisit ${esc(weak[0].name)}</strong><p>Your practice result suggests another review may help. A quiz score is a signal, not a judgement of ability.</p></div></div>`;if(notTaught.length)out+=`<div class="planitem"><span class="daytag">NEXT</span><div><strong>Check ${esc(notTaught[0].name)}</strong><p>This topic is not yet teacher-confirmed as taught. Follow the class and syllabus before planning it as completed learning.</p></div></div>`;out+='<div class="planitem"><span class="daytag">DAILY</span><div><strong>Study a little, then practise</strong><p>After reviewing a topic, attempt a short quiz and use the result to choose what to revisit.</p></div></div>';document.getElementById("revisionPlan").innerHTML=out}
 
 function renderResourceList(){const target=document.getElementById("resourceList");if(!target)return;const items=uploadedResources[subject().id]||[];target.innerHTML=items.length?items.map((r,i)=>`<div class="topic" style="align-items:center;gap:12px"><span class="topicmain"><strong>${esc(r.filename||r.name||"Resource")}</strong><span>${esc(r.status||"Uploaded")}${r.chars?" · "+r.chars+" extracted characters":""}</span></span><span class="pill done">SAVED</span><button type="button" class="secondary" data-remove-resource="${i}" style="flex-shrink:0;padding:8px 11px;color:#ff8a8a!important;border-color:#5a2d38!important">Remove</button></div>`).join(""):'<p class="empty">No resources loaded yet. Start by uploading the materials you teach from.</p>'}
-async function generateLearningPackForTopic(topicId){if(role!=="teacher"){alert("Only teachers can generate learning packs.");return}const s=subject(),topic=s.topics.find(t=>t.id===topicId);if(!topic)return;selectedPackTopicId=topic.id;const status=document.getElementById("topicPackStatus-"+CSS.escape(topic.id));if(status){status.style.color="#9aa5c3";status.textContent="Sending this topic and saved resources to Gemma 4…"}try{const res=await fetch("/api/generate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({subject_id:s.id,subject_name:s.name,topic_id:topic.id,topic_name:topic.name})});const data=await res.json();if(!res.ok)throw new Error(data.error||"AI generation failed");generatedPacks[s.id+"::"+topic.id]={content:data.pack,approved:false,generatedAt:new Date().toISOString()};localStorage.setItem("sts_generated_packs",JSON.stringify(generatedPacks));if(status){status.style.color="#3fe0b5";status.textContent="Draft generated. Select Review Learning Pack to check it before approval."}renderLearn();renderBatchFlow()}catch(err){if(status){status.style.color="#ffc46b";status.textContent="Could not generate: "+err.message+". Check the backend and GEMMA_API_KEY."}}}
+async function generateLearningPackForTopic(topicId){if(role!=="teacher"){alert("Only teachers can generate learning packs.");return}const s=subject(),topic=s.topics.find(t=>t.id===topicId);if(!topic)return;selectedPackTopicId=topic.id;const status=document.getElementById("topicPackStatus-"+CSS.escape(topic.id));if(status){status.style.color="#9aa5c3";status.textContent="Sending this topic and saved resources to Gemma 4…"}try{const res=await fetch(apiUrl("/api/generate"),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({subject_id:s.id,subject_name:s.name,topic_id:topic.id,topic_name:topic.name})});const data=await res.json();if(!res.ok)throw new Error(data.error||"AI generation failed");generatedPacks[s.id+"::"+topic.id]={content:data.pack,approved:false,generatedAt:new Date().toISOString()};localStorage.setItem("sts_generated_packs",JSON.stringify(generatedPacks));if(status){status.style.color="#3fe0b5";status.textContent="Draft generated. Select Review Learning Pack to check it before approval."}renderLearn();renderBatchFlow()}catch(err){if(status){status.style.color="#ffc46b";status.textContent="Could not generate: "+apiErr(err)+(isNetErr(err)?"":" (Check GEMMA_API_KEY and the backend log.)")}}}
 document.getElementById("flowTopicList")?.addEventListener("click",e=>{const generate=e.target.closest("[data-generate-topic]");if(generate){e.stopPropagation();generateLearningPackForTopic(generate.dataset.generateTopic);return}const review=e.target.closest("[data-review-topic]");if(review){e.stopPropagation();selectedPackTopicId=review.dataset.reviewTopic;renderLearn();go("learn");return}if(e.target.closest("[data-topic]"))return;const row=e.target.closest("[data-expand-topic-row]");const expand=e.target.closest("[data-expand-topic]");const topicId=expand?.dataset.expandTopic||row?.dataset.expandTopicRow;if(topicId){expandedTeacherTopicId=expandedTeacherTopicId===topicId?null:topicId;renderBatchFlow()}});
-document.getElementById("resourceList")?.addEventListener("click",async e=>{const button=e.target.closest("[data-remove-resource]");if(!button)return;e.preventDefault();e.stopPropagation();if(role!=="teacher"){alert("Only teachers can remove teaching sources.");return}const subjectId=subject().id,index=Number(button.dataset.removeResource),items=uploadedResources[subjectId]||[],resource=items[index];if(!resource)return;const resourceName=resource.filename||resource.name||"this resource";if(!confirm(`Permanently remove “${resourceName}” from this subject? Existing learning packs for this subject will need to be regenerated.`))return;const status=document.getElementById("resourceStatus");button.disabled=true;button.textContent="Removing…";status.style.color="#9aa5c3";status.textContent="Removing the saved resource…";try{if(!resource.resource_id)throw new Error("This resource has no server ID. Please refresh the page and try again.");const res=await fetch(`/api/resources/${encodeURIComponent(resource.resource_id)}`,{method:"DELETE"});let data={};try{data=await res.json()}catch{}if(!res.ok)throw new Error(data.error||"The server could not delete this resource.");uploadedResources[subjectId]=items.filter((_,i)=>i!==index);localStorage.setItem("sts_uploaded_resources",JSON.stringify(uploadedResources));for(const key of Object.keys(generatedPacks)){if(key.startsWith(subjectId+"::"))delete generatedPacks[key]}localStorage.setItem("sts_generated_packs",JSON.stringify(generatedPacks));renderResourceList();renderLearn();renderBatchFlow();status.style.color="#3fe0b5";status.textContent="Resource permanently deleted. Saved learning packs for this subject were cleared; regenerate them from the remaining sources."}catch(err){button.disabled=false;button.textContent="Remove";status.style.color="#ffc46b";status.textContent="Could not remove resource: "+err.message+". Nothing was removed from the visible list."}});
-document.getElementById("uploadResourcesBtn")?.addEventListener("click",async()=>{if(role!=="teacher"){alert("Only teachers can upload teaching sources.");return}const input=document.getElementById("teachingResources"),files=[...(input.files||[])];if(!files.length){document.getElementById("resourceStatus").textContent="Choose one or more files first.";return}const status=document.getElementById("resourceStatus");status.textContent="Uploading and extracting text…";try{for(const file of files){const form=new FormData();form.append("file",file);form.append("subject_id",subject().id);form.append("subject_name",subject().name);const res=await fetch("/api/resources",{method:"POST",body:form});const data=await res.json();if(!res.ok)throw new Error(data.error||("Could not process "+file.name));const arr=uploadedResources[subject().id]||(uploadedResources[subject().id]=[]);arr.push({filename:data.filename,status:"Text extracted",chars:data.chars,resource_id:data.resource_id});localStorage.setItem("sts_uploaded_resources",JSON.stringify(uploadedResources))}status.style.color="#3fe0b5";status.textContent="Uploaded "+files.length+" resource(s). Existing resources were kept.";input.value="";renderResourceList()}catch(err){status.style.color="#ffc46b";status.textContent="Upload failed: "+err.message+". Check that the Python backend is running."}});
+document.getElementById("resourceList")?.addEventListener("click",async e=>{const button=e.target.closest("[data-remove-resource]");if(!button)return;e.preventDefault();e.stopPropagation();if(role!=="teacher"){alert("Only teachers can remove teaching sources.");return}const subjectId=subject().id,index=Number(button.dataset.removeResource),items=uploadedResources[subjectId]||[],resource=items[index];if(!resource)return;const resourceName=resource.filename||resource.name||"this resource";if(!confirm(`Permanently remove “${resourceName}” from this subject? Existing learning packs for this subject will need to be regenerated.`))return;const status=document.getElementById("resourceStatus");button.disabled=true;button.textContent="Removing…";status.style.color="#9aa5c3";status.textContent="Removing the saved resource…";try{if(!resource.resource_id)throw new Error("This resource has no server ID. Please refresh the page and try again.");const res=await fetch(apiUrl(`/api/resources/${encodeURIComponent(resource.resource_id)}`),{method:"DELETE"});let data={};try{data=await res.json()}catch{}if(!res.ok)throw new Error(data.error||"The server could not delete this resource.");uploadedResources[subjectId]=items.filter((_,i)=>i!==index);localStorage.setItem("sts_uploaded_resources",JSON.stringify(uploadedResources));for(const key of Object.keys(generatedPacks)){if(key.startsWith(subjectId+"::"))delete generatedPacks[key]}localStorage.setItem("sts_generated_packs",JSON.stringify(generatedPacks));renderResourceList();renderLearn();renderBatchFlow();status.style.color="#3fe0b5";status.textContent="Resource permanently deleted. Saved learning packs for this subject were cleared; regenerate them from the remaining sources."}catch(err){button.disabled=false;button.textContent="Remove";status.style.color="#ffc46b";status.textContent="Could not remove resource: "+apiErr(err)+" Nothing was removed from the visible list."}});
+document.getElementById("uploadResourcesBtn")?.addEventListener("click",async()=>{if(role!=="teacher"){alert("Only teachers can upload teaching sources.");return}const input=document.getElementById("teachingResources"),files=[...(input.files||[])];if(!files.length){document.getElementById("resourceStatus").textContent="Choose one or more files first.";return}const status=document.getElementById("resourceStatus");status.textContent="Uploading and extracting text…";try{for(const file of files){const form=new FormData();form.append("file",file);form.append("subject_id",subject().id);form.append("subject_name",subject().name);const res=await fetch(apiUrl("/api/resources"),{method:"POST",body:form});const data=await res.json();if(!res.ok)throw new Error(data.error||("Could not process "+file.name));const arr=uploadedResources[subject().id]||(uploadedResources[subject().id]=[]);arr.push({filename:data.filename,status:"Text extracted",chars:data.chars,resource_id:data.resource_id});localStorage.setItem("sts_uploaded_resources",JSON.stringify(uploadedResources))}status.style.color="#3fe0b5";status.textContent="Uploaded "+files.length+" resource(s). Existing resources were kept.";input.value="";renderResourceList()}catch(err){status.style.color="#ffc46b";status.textContent="Upload failed: "+apiErr(err)}});
 document.getElementById("approvePackBtn")?.addEventListener("click",()=>{const s=subject(),topic=s.topics.find(t=>t.id===selectedPackTopicId)||s.topics[0];if(!topic)return;const key=s.id+"::"+topic.id;if(!generatedPacks[key])return;generatedPacks[key].approved=!generatedPacks[key].approved;localStorage.setItem("sts_generated_packs",JSON.stringify(generatedPacks));renderLearn()});
-function renderAll(){renderRole();renderHome();renderDirectories();renderSyllabus();renderLearn();renderRevision();renderBatchFlow();setBatchFlow(batchFlowScreen)}
-function chooseSubject(id){const s=subjects.find(x=>x.id===id);if(!s)return;if(role==="teacher"&&!TEACHER.subjectIds.includes(id)){alert("This subject is not assigned to the demo teacher.");return}selectedSubjectId=id;renderAll()}
+function renderAll(){renderRole();renderHome();renderDirectories();renderSyllabus();renderLearn();renderRevision();renderBatchFlow();renderSubjectPicker();setBatchFlow(batchFlowScreen)}
+function chooseSubject(id){const s=subjects.find(x=>x.id===id);if(!s)return;if(role==="teacher"&&!TEACHER.subjectIds.includes(id)){alert("This subject is not assigned to the demo teacher.");return}if(selectedSubjectId!==id)resetSyllabusForm();selectedSubjectId=id;renderAll()}
 document.querySelectorAll("[data-page]").forEach(btn=>btn.addEventListener("click",()=>{if(role==="student"&&["batches","syllabus"].includes(btn.dataset.page))return;if(role==="teacher"&&btn.dataset.page==="revision")return;if(btn.dataset.page==="batches")setBatchFlow("departments");if(btn.dataset.page==="syllabus"){syllabusFlowScreen="Departments";syllabusWorkspaceOpen=false}go(btn.dataset.page)}));
 document.querySelectorAll("[data-goto]").forEach(btn=>btn.addEventListener("click",()=>{if(btn.dataset.goto==="learn"){selectedPackTopicId=subject().topics[0]?.id||null;renderLearn()}if(btn.dataset.goto==="syllabus"){syllabusFlowScreen="Subjects";syllabusWorkspaceOpen=true}go(btn.dataset.goto)}));
-document.getElementById("teacherBtn").addEventListener("click",()=>{role="teacher";expandedTeacherTopicId=null;selectedBatchId="first";if(!TEACHER.subjectIds.includes(selectedSubjectId))selectedSubjectId="web";setBatchFlow("departments");go("home",false)});
-document.getElementById("studentBtn").addEventListener("click",()=>{role="student";selectedBatchId="first";go("home",false)});
+document.getElementById("teacherBtn").addEventListener("click",()=>{role="teacher";expandedTeacherTopicId=null;selectedBatchId="first";if(!TEACHER.subjectIds.includes(selectedSubjectId))selectedSubjectId=TEACHER.subjectIds[0]||selectedSubjectId;setBatchFlow("departments");go("home",false)});
+document.getElementById("studentBtn").addEventListener("click",()=>{if(!(studentClassCode&&classrooms[studentClassCode])){if(teacherSetup&&teacherSetup.classCode)studentClassCode=teacherSetup.classCode;else{openGate();gateScreen("Join");return}}role="student";selectedBatchId="first";ensureSubjectSelection();go("home",false)});
 document.addEventListener("click",e=>{
  const syDept=e.target.closest("[data-sy-dept]");if(syDept){syllabusFlowScreen="Courses";renderSyllabus();return}
  const syPreview=e.target.closest("[data-sy-preview]");if(syPreview){alert(syPreview.dataset.syPreview+" is preview-only. The working syllabus flow is Management → BBA-CA → First Year.");return}
@@ -485,7 +591,164 @@ fileInput.addEventListener("change",async e=>{const file=e.target.files[0];if(!f
 function parseTopics(text){return text.split(/\r?\n/).map(x=>x.trim()).filter(Boolean).map(x=>x.replace(/^#{1,6}\s*/,"").replace(/^(unit|module|chapter)\s+[\w.-]+\s*[:—-]?\s*/i,"").replace(/^\d+(?:\.\d+)*[\s.)-]+/,"").replace(/^[-*•]\s*/,"").trim()).filter(x=>x.length>1&&!/^(syllabus|subject name|course name|semester|contents|table of contents)$/i.test(x)).filter((x,i,a)=>a.findIndex(y=>y.toLowerCase()===x.toLowerCase())===i).slice(0,120)}
 document.getElementById("extractBtn").addEventListener("click",()=>{if(role!=="teacher"){alert("Switch to Teacher view to manage a syllabus.");return}const text=document.getElementById("syllabusText").value.trim();const msg=document.getElementById("extractMessage");if(!text){msg.style.color="#ffc46b";msg.textContent="Upload a supported file, add a screenshot, or paste the syllabus text first.";return}pendingTopics=parseTopics(text);if(!pendingTopics.length){msg.style.color="#ffc46b";msg.textContent="No likely topic lines found. Try placing each topic on its own line.";return}document.getElementById("topicDraft").value=pendingTopics.join("\n");document.getElementById("reviewArea").style.display="block";msg.style.color="#3fe0b5";msg.textContent="Found "+pendingTopics.length+" possible lines. Review and edit them before confirming."});
 document.getElementById("confirmSyllabusBtn").addEventListener("click",()=>{if(role!=="teacher"){alert("Switch to Teacher view to confirm the syllabus.");return}const names=document.getElementById("topicDraft").value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);if(!names.length){alert("Please add at least one topic.");return}const s=subject();s.topics=names.map((name,i)=>({id:s.id+"_uploaded_"+Date.now()+"_"+i,name,done:false}));save();document.getElementById("reviewArea").style.display="none";document.getElementById("extractMessage").style.color="#3fe0b5";document.getElementById("extractMessage").textContent="Syllabus confirmed. The selected subject now uses your reviewed topic list.";renderAll()});
+
+/* ===== Entry screen + teacher-controlled subjects (chosen inside the hierarchy) ===== */
+const CATALOG=[{id:"web",name:"Introduction to Web Development"},{id:"dbms",name:"Database Management Systems"},{id:"programming",name:"Programming Fundamentals"},{id:"java",name:"Java Programming"},{id:"os",name:"Operating Systems"},{id:"dsa",name:"Data Structures"},{id:"se",name:"Software Engineering"},{id:"cn",name:"Computer Networks"},{id:"communication",name:"Business Communication"},{id:"management",name:"Principles of Management"}];
+let customCatalog=readStore("sts_custom_catalog",[]);
+const OPT_HUES=[235,165,330,38,280,200,12,300];
+let pickerEditing=null;
+let pickerOpen=TEACHER.subjectIds.length===0;
+function shortOf(n){const w=String(n).replace(/[^A-Za-z0-9 ]/g,"").trim().split(/\s+/).filter(Boolean);return(w.length>1?w[0][0]+w[1][0]:(w[0]||"SB").slice(0,2)).toUpperCase()}
+function setupOptions(){return CATALOG.concat(customCatalog)}
+function ensureSubjectSelection(){const l=allForBatch();if(l.length&&!l.some(s=>s.id===selectedSubjectId))selectedSubjectId=l[0].id}
+function openGate(){document.body.classList.add("gated");document.getElementById("gate").classList.add("show")}
+function closeGate(){document.body.classList.remove("gated");document.getElementById("gate").classList.remove("show")}
+function persistTeacher(){teacherSetupDone=true;try{localStorage.setItem("sts_teacher_ids",JSON.stringify(TEACHER.subjectIds));localStorage.setItem("sts_teacher_setup","true");localStorage.setItem("sts_custom_catalog",JSON.stringify(customCatalog))}catch(e){}save()}
+/* Assign / rename / unassign never delete a subject object, its resources or its learning packs (all keyed by subject id). */
+function assignSubject(id){const o=setupOptions().find(x=>x.id===id);if(!o)return;let s=subjects.find(x=>x.id===id);
+ if(!s){s={id,name:o.name,short:shortOf(o.name),teacher:TEACHER.name,batchId:"first",topics:[],owned:true};subjects.push(s)}
+ else{if(!s.owned){if(!s.topics.some(t=>String(t.id).includes("_uploaded_")))s.topics=[];s.owned=true}s.teacher=TEACHER.name}
+ if(!TEACHER.subjectIds.includes(id))TEACHER.subjectIds.push(id);
+ if(!TEACHER.subjectIds.includes(selectedSubjectId)||selectedSubjectId===id)selectedSubjectId=id;persistTeacher()}
+function unassignSubject(id){TEACHER.subjectIds=TEACHER.subjectIds.filter(x=>x!==id);if(!TEACHER.subjectIds.length)pickerOpen=true;ensureSubjectSelection();persistTeacher()}
+function renameSubject(id,name){const s=subjects.find(x=>x.id===id);if(s){s.name=name;persistTeacher()}}
+function commitPickerEdit(){const inp=document.querySelector("#subjectPicker [data-pk-input]");if(inp&&pickerEditing){const v=inp.value.trim();if(v)renameSubject(pickerEditing,v)}pickerEditing=null}
+function renderSubjectPicker(){
+ const el=document.getElementById("subjectPicker");if(!el)return;
+ const wrap=document.getElementById("pickerWrap"),tg=document.getElementById("togglePickerBtn");if(wrap)wrap.style.display=pickerOpen?"block":"none";if(tg){tg.classList.toggle("open",pickerOpen);tg.title=pickerOpen?"Close":"Add a subject"}
+ el.innerHTML=setupOptions().map((o,i)=>{const on=TEACHER.subjectIds.includes(o.id),ed=pickerEditing===o.id,s=subjects.find(x=>x.id===o.id),nm=(s&&on?s.name:o.name),sh=(s&&s.short)||shortOf(nm);
+  return `<div class="subj-opt ${on?"on":""}" data-pk="${esc(o.id)}" style="--accent:hsl(${OPT_HUES[i%OPT_HUES.length]} 85% 68%)"><span class="subj-check">${on?"✓":""}</span><span class="subj-ico">${esc(sh)}</span>${ed?`<input class="field subj-edit" data-pk-input value="${esc(nm)}" maxlength="60" aria-label="Subject name">`:`<strong>${esc(nm)}</strong>`}<span class="subj-hint">${on?"You teach this":"Tap to add to my subjects"}</span>${on?`<div class="subj-actions"><button type="button" data-pk-rename="${esc(o.id)}">${ed?"✓ Done":"✎ Rename"}</button><button type="button" data-pk-remove="${esc(o.id)}">✕ Remove</button></div>`:""}</div>`}).join("");
+ const inp=el.querySelector("[data-pk-input]");if(inp){inp.focus();inp.select()}
+}
+document.getElementById("subjectPicker").addEventListener("click",e=>{
+ const rn=e.target.closest("[data-pk-rename]");
+ if(rn){const id=rn.dataset.pkRename;if(pickerEditing===id)commitPickerEdit();else{commitPickerEdit();pickerEditing=id}renderAll();return}
+ const rm=e.target.closest("[data-pk-remove]");
+ if(rm){commitPickerEdit();unassignSubject(rm.dataset.pkRemove);renderAll();return}
+ if(e.target.closest("input"))return;
+ const card=e.target.closest("[data-pk]");if(!card)return;
+ commitPickerEdit();const id=card.dataset.pk;
+ if(TEACHER.subjectIds.includes(id))unassignSubject(id);else assignSubject(id);
+ renderAll()});
+document.getElementById("subjectPicker").addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.matches("[data-pk-input]")){commitPickerEdit();renderAll()}});
+function addCustom(){const inp=document.getElementById("customName"),msg=document.getElementById("customMsg"),name=inp.value.trim();
+ if(!name){msg.textContent="Type a subject name first.";return}
+ const taken=setupOptions().some(o=>((subjects.find(s=>s.id===o.id&&TEACHER.subjectIds.includes(o.id))||o).name).toLowerCase()===name.toLowerCase());
+ if(taken){msg.textContent="That subject is already in the list.";return}
+ const o={id:"custom_"+Date.now(),name};customCatalog.push(o);assignSubject(o.id);inp.value="";msg.textContent="Added “"+name+"” to your subjects.";renderAll()}
+document.getElementById("addCustomBtn").addEventListener("click",addCustom);
+document.getElementById("customName").addEventListener("keydown",e=>{if(e.key==="Enter")addCustom()});
+/* Syllabus upload now sits inside the subject's topic screen */
+function resetSyllabusForm(){["syllabusText","topicDraft","syllabusFile"].forEach(id=>{const e=document.getElementById(id);if(e)e.value=""});document.getElementById("reviewArea").style.display="none";["extractMessage","ocrStatus"].forEach(id=>document.getElementById(id).textContent="");document.getElementById("imagePreview").style.display="none";document.getElementById("ocrProgressWrap").style.display="none"}
+(function(){const slot=document.getElementById("syllabusSlot"),panel=document.querySelector("#syllabusSubjectWorkspace .panel");if(slot&&panel){slot.appendChild(panel);const c=document.getElementById("confirmedSyllabus");if(c){if(c.previousElementSibling)c.previousElementSibling.style.display="none";c.style.display="none"}}})();
+/* Collapsible picker */
+document.getElementById("togglePickerBtn").addEventListener("click",()=>{commitPickerEdit();pickerOpen=!pickerOpen;renderSubjectPicker()});
+document.getElementById("donePickerBtn").addEventListener("click",()=>{commitPickerEdit();pickerOpen=false;renderAll()});
+
+/* ===== Teacher onboarding: Department → Course → Year → Semester → Setup finished ===== */
+const G_DEPTS=[{name:"Management",emoji:"🏢",sub:"BBA · BBA-CA · BCA",live:true},{name:"Science",emoji:"🧪",sub:"Department structure preview"},{name:"IT",emoji:"💻",sub:"Department structure preview"}];
+const G_COURSES=[{name:"BBA",sub:"Bachelor of Business Administration"},{name:"BBA-CA",sub:"Computer Applications",live:true},{name:"BCA",sub:"Bachelor of Computer Applications"}];
+const G_YEARS=[{name:"First Year",sub:"Semester 1 · Division A",live:true},{name:"Second Year",sub:"Year preview"},{name:"Third Year",sub:"Year preview"}];
+let gExtra=readStore("sts_g_extra",{depts:[],courses:[],fourth:false});
+let teacherSetup=readStore("sts_setup",null);
+let classrooms=readStore("sts_classrooms",{});
+let studentClassCode=readStore("sts_student_class",null);
+function saveExtra(){try{localStorage.setItem("sts_g_extra",JSON.stringify(gExtra))}catch(e){}}
+function gateScreen(n){["Role","Dept","Course","Year","Sem","Done","Join"].forEach(s=>{const el=document.getElementById("g"+s);if(el)el.style.display=s===n?"block":"none"});document.getElementById("gate").scrollTop=0;const sk=document.getElementById("skipSetupBtn");if(sk)sk.style.display=(n==="Dept"&&teacherSetup)?"inline-flex":"none"}
+function gCards(list,attr){return list.map(x=>`<button type="button" class="rowtab ${x.live?"selected":""}" ${x.live?`data-${attr}="${esc(x.name)}"`:"disabled"}><strong>${x.emoji?x.emoji+" &nbsp; ":""}${esc(x.name)}</strong><span>${esc(x.sub)}</span><span class="batchtag ${x.live?"live":""}">${x.live?"WORKING DEMO":"PREVIEW ONLY"}</span></button>`).join("")}
+function renderGate(){
+ document.getElementById("gDeptGrid").innerHTML=gCards(G_DEPTS.concat(gExtra.depts.map(n=>({name:n,emoji:"🏛️",sub:"Added by you · preview only"}))),"gdept");
+ document.getElementById("gCourseGrid").innerHTML=gCards(G_COURSES.concat(gExtra.courses.map(n=>({name:n,sub:"Added by you · preview only"}))),"gcourse");
+ document.getElementById("gYearGrid").innerHTML=gCards(G_YEARS.concat(gExtra.fourth?[{name:"Fourth Year",sub:"Added by you · preview only"}]:[]),"gyear");
+ document.getElementById("addFourthBtn").style.display=gExtra.fourth?"none":"inline-flex";
+}
+function addGItem(key,inputId,msgId,base,label){const inp=document.getElementById(inputId),msg=document.getElementById(msgId),name=inp.value.trim();
+ if(!name){msg.textContent="Type a name first.";return}
+ const all=base.map(x=>x.name).concat(gExtra[key]);if(all.some(x=>x.toLowerCase()===name.toLowerCase())){msg.textContent="That "+label+" is already listed.";return}
+ gExtra[key].push(name);saveExtra();inp.value="";msg.textContent="Added “"+name+"”. It is preview-only for now.";renderGate()}
+document.getElementById("addDeptBtn").addEventListener("click",()=>addGItem("depts","newDept","deptMsg",G_DEPTS,"department"));
+document.getElementById("addCourseBtn").addEventListener("click",()=>addGItem("courses","newCourse","courseMsg",G_COURSES,"course"));
+document.getElementById("newDept").addEventListener("keydown",e=>{if(e.key==="Enter")document.getElementById("addDeptBtn").click()});
+document.getElementById("newCourse").addEventListener("keydown",e=>{if(e.key==="Enter")document.getElementById("addCourseBtn").click()});
+document.getElementById("addFourthBtn").addEventListener("click",()=>{gExtra.fourth=true;saveExtra();renderGate()});
+function semNumber(v){return String(v).replace(/^\s*sem(ester)?\.?\s*/i,"").trim()||String(v)}
+function makeCode(){const a="ABCDEFGHJKMNPQRSTUVWXYZ23456789";let r="";for(let i=0;i<4;i++)r+=a[Math.floor(Math.random()*a.length)];const yn={first:1,second:2,third:3,fourth:4}[String(teacherSetup.year||"").split(" ")[0].toLowerCase()]||1;return String(teacherSetup.course||"CLASS").replace(/[^A-Za-z0-9]/g,"").toUpperCase()+"-Y"+yn+"-"+r}
+function classLink(code){return location.href.split("#")[0].split("?")[0]+"?class="+encodeURIComponent(code)}
+function applySetup(){if(!teacherSetup)return;
+ if(!teacherSetup.classCode){teacherSetup.classCode=makeCode();try{localStorage.setItem("sts_setup",JSON.stringify(teacherSetup))}catch(e){}}
+ BATCHES[0].semester=semNumber(teacherSetup.semester);
+ classrooms[teacherSetup.classCode]={code:teacherSetup.classCode,dept:teacherSetup.dept,course:teacherSetup.course,year:teacherSetup.year,semester:BATCHES[0].semester};
+ try{localStorage.setItem("sts_classrooms",JSON.stringify(classrooms))}catch(e){}
+ const p=document.getElementById("flowSubjectsSub");if(p)p.textContent=teacherSetup.dept+" · "+teacherSetup.course+" · "+teacherSetup.year+" · Classroom · Semester "+BATCHES[0].semester;
+ const dn=document.getElementById("dashDeptName"),ds=document.getElementById("dashDeptSub");if(dn)dn.innerHTML="🏢 &nbsp; "+esc(teacherSetup.dept);if(ds)ds.textContent=teacherSetup.course+" · "+teacherSetup.year}
+function finishSetup(){const v=document.getElementById("semInput").value.trim(),msg=document.getElementById("semMsg");
+ if(!v){msg.textContent="Enter the semester, for example 1 or Semester 2.";return}
+ teacherSetup={dept:"Management",course:"BBA-CA",year:"First Year",semester:v,classCode:teacherSetup&&teacherSetup.classCode};try{localStorage.setItem("sts_setup",JSON.stringify(teacherSetup))}catch(e){}
+ applySetup();
+ document.getElementById("doneSummary").innerHTML=[["DEPARTMENT",teacherSetup.dept],["COURSE",teacherSetup.course],["YEAR",teacherSetup.year],["SEMESTER","Semester "+BATCHES[0].semester],["CLASS CODE · share this with your students",teacherSetup.classCode]].map(([a,b],i)=>`<div class="sum-row${i===4?" wide":""}"><span>${a}</span><strong>${esc(b)}</strong></div>`).join("");
+ gateScreen("Done")}
+document.getElementById("finishSetupBtn").addEventListener("click",finishSetup);
+document.getElementById("semInput").addEventListener("keydown",e=>{if(e.key==="Enter")finishSetup()});
+function enterTeacherDashboard(){role="teacher";selectedBatchId="first";expandedTeacherTopicId=null;closeGate();setBatchFlow("departments");go("home")}
+document.getElementById("enterDashBtn").addEventListener("click",enterTeacherDashboard);
+document.getElementById("gate").addEventListener("click",e=>{
+ const back=e.target.closest("[data-gback]");if(back){gateScreen(back.dataset.gback);return}
+ if(e.target.closest("[data-gdept]")){gateScreen("Course");return}
+ if(e.target.closest("[data-gcourse]")){gateScreen("Year");return}
+ if(e.target.closest("[data-gyear]")){document.getElementById("semInput").value=teacherSetup?teacherSetup.semester:"";document.getElementById("semMsg").textContent="";gateScreen("Sem");return}
+ const chip=e.target.closest("[data-sem-chip]");if(chip){document.getElementById("semInput").value=chip.dataset.semChip;document.getElementById("semMsg").textContent=""}});
+
+/* Entry */
+document.getElementById("pickTeacher").addEventListener("click",()=>{renderGate();gateScreen("Dept")});
+document.getElementById("skipSetupBtn").addEventListener("click",enterTeacherDashboard);
+document.getElementById("pickStudent").addEventListener("click",()=>{if(studentClassCode&&classrooms[studentClassCode])enterStudent();else{document.getElementById("joinMsg").textContent="";gateScreen("Join")}});
+document.addEventListener("click",e=>{
+ if(e.target.closest("[data-edit-subjects]")){pickerOpen=true;selectedBatchId="first";setBatchFlow("subjects");go("batches");return}
+ if(e.target.closest("[data-edit-setup]")){renderGate();openGate();gateScreen("Dept")}});
+applySetup();renderGate();
+/* ===== Classroom code & link: teacher shares, student pastes ===== */
+function parseClassCode(v){v=String(v||"").trim();if(!v)return"";try{const c=new URL(v).searchParams.get("class");if(c)return c.trim().toUpperCase()}catch(e){}const m=v.match(/[?&]class=([A-Za-z0-9-]+)/i);if(m)return m[1].toUpperCase();return v.replace(/\s+/g,"").toUpperCase()}
+function enterStudent(){role="student";selectedBatchId="first";ensureSubjectSelection();closeGate();go("home")}
+function joinClass(){const msg=document.getElementById("joinMsg"),code=parseClassCode(document.getElementById("joinInput").value);
+ if(!code){msg.textContent="Paste a class code or link first.";return}
+ if(!classrooms[code]){msg.textContent="We couldn't find that classroom on this device. Check the code with your teacher. (This prototype keeps classrooms in the browser only.)";return}
+ studentClassCode=code;try{localStorage.setItem("sts_student_class",JSON.stringify(code))}catch(e){}msg.textContent="";enterStudent()}
+document.getElementById("joinBtn").addEventListener("click",joinClass);
+document.getElementById("joinInput").addEventListener("keydown",e=>{if(e.key==="Enter")joinClass()});
+function renderClassroomCard(){const card=document.getElementById("classroomShare");if(!card)return;
+ if(!teacherSetup||!teacherSetup.classCode){card.style.display="none";return}
+ card.style.display="block";
+ document.getElementById("classroomTitle").textContent=teacherSetup.course+" · "+teacherSetup.year+" · Semester "+BATCHES[0].semester;
+ document.getElementById("classCodeText").textContent=teacherSetup.classCode;
+ document.getElementById("classLinkText").textContent=classLink(teacherSetup.classCode)}
+function updateStudentClassLabel(){const c=classrooms[studentClassCode],eb=document.querySelector(".studentWelcome .eyebrow");if(eb)eb.textContent=c?("YOUR LEARNING JOURNEY · "+c.course+" · "+c.year).toUpperCase():"YOUR LEARNING JOURNEY"}
+const _enhanceHome=enhanceHome;
+enhanceHome=function(){_enhanceHome();renderClassroomCard();updateStudentClassLabel()};
+function copyText(t){if(navigator.clipboard&&navigator.clipboard.writeText)return navigator.clipboard.writeText(t);return new Promise((res,rej)=>{const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");res()}catch(e){rej(e)}a.remove()})}
+document.addEventListener("click",e=>{
+ const b=e.target.closest("[data-copy]");
+ if(b&&teacherSetup){const isCode=b.dataset.copy==="code",msg=document.getElementById("copyMsg");
+  copyText(isCode?teacherSetup.classCode:classLink(teacherSetup.classCode)).then(()=>{msg.style.color="#3fe0b5";msg.textContent=(isCode?"Class code":"Class link")+" copied ✓"}).catch(()=>{msg.style.color="#ffc46b";msg.textContent="Couldn't copy automatically. Select the text and copy it."});return}
+ if(e.target.closest("[data-leave-class]")){studentClassCode=null;try{localStorage.removeItem("sts_student_class")}catch(x){}document.getElementById("joinInput").value="";document.getElementById("joinMsg").textContent="";openGate();gateScreen("Join")}});
+/* ===== Backend connection (uploads + Gemma generation) ===== */
+let API_BASE=readStore("sts_api_base","");
+function apiUrl(p){return String(API_BASE||"").replace(/\/+$/,"")+p}
+function isNetErr(e){return !!e&&(e.name==="TypeError"||/failed to fetch|networkerror|load failed/i.test(e.message||""))}
+function apiErr(e){if(isNetErr(e)){return location.protocol==="file:"&&!API_BASE?"this page was opened as a file, so it cannot reach the Python backend. Start the backend, then open the address it prints (for example http://localhost:5000), or type that address into Backend connection.":"could not reach the backend"+(API_BASE?" at "+API_BASE:"")+". Make sure the Python server is running and that it allows requests from this page."}return (e&&e.message)||String(e)}
+function renderBackendStatus(){const st=document.getElementById("backendStatus"),inp=document.getElementById("apiBaseInput");if(!st)return;if(inp&&document.activeElement!==inp)inp.value=API_BASE||"";
+ if(location.protocol==="file:"&&!API_BASE){st.style.color="#ffc46b";st.textContent="This page was opened as a file, so uploads and Gemma generation cannot reach the Python backend. Open the address your backend prints (e.g. http://localhost:5000), or enter it below."}
+ else{st.style.color="#9aa5c3";st.textContent="Using "+(API_BASE||location.origin)+". Press the button to test the connection."}}
+async function testBackend(){const st=document.getElementById("backendStatus");API_BASE=document.getElementById("apiBaseInput").value.trim();try{localStorage.setItem("sts_api_base",JSON.stringify(API_BASE))}catch(e){}
+ st.style.color="#9aa5c3";st.textContent="Testing…";
+ try{const r=await fetch(apiUrl("/api/resources"),{method:"GET"});st.style.color="#3fe0b5";st.textContent="✓ Backend reachable at "+(API_BASE||location.origin)+" (HTTP "+r.status+")."}catch(e){st.style.color="#ffc46b";st.textContent="✗ "+apiErr(e)}}
+document.getElementById("testBackendBtn").addEventListener("click",testBackend);
+renderBackendStatus();
+ensureSubjectSelection();
 renderAll();
+(function(){const raw=(new URLSearchParams(location.search).get("class")||"").trim().toUpperCase();
+ if(raw){if(classrooms[raw]){studentClassCode=raw;try{localStorage.setItem("sts_student_class",JSON.stringify(raw))}catch(e){}enterStudent();return}
+  openGate();gateScreen("Join");document.getElementById("joinInput").value=raw;document.getElementById("joinMsg").textContent="We couldn't find that classroom on this device. Check the code with your teacher.";return}
+ openGate()})();
 
 </script>
 </body>
