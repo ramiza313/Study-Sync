@@ -1,4 +1,4 @@
-# Syllabus to Success — source-grounded AI prototype
+# Study Sync — source-grounded AI prototype
 
 A hackathon prototype for teacher-uploaded learning sources → extracted text → Gemma-powered topic summary, activity and quiz → teacher review/approval.
 
